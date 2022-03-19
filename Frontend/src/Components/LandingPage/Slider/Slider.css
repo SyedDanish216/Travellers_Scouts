@@ -1,0 +1,76 @@
+/* .outerrow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.leftbtn {
+  width: 40px;
+  position: absolute;
+  left: 0%;
+  z-index: 99;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 7px;
+}
+.leftbtn i {
+
+  font-size: 55px;
+
+  font-weight: bold;
+}
+
+.rightbtn {
+  width: 40px;
+  height: 100%;
+
+  position: absolute;
+  z-index: 99;
+
+  display: flex;
+  right: 0%;
+  justify-content: center;
+  align-items: center;
+ 
+
+  border-radius: 7px;
+}
+.rightbtn i {
+
+  font-size: 55px;
+
+  font-weight: bold;
+}
+.rightbtn:hover{
+    cursor: pointer;
+}
+.leftbtn:hover{
+    cursor: pointer;
+}
+.slideimages {
+  display: flex;
+  margin-left: 40px;
+  margin-right: 40px;
+  transform: translateX(0);
+  transition: all 0.5s ease;
+} */
+@import url("https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@700&display=swap");
+
+.styleclass{
+  justify-content:center;
+  align-items: center;
+  align-content: center;
+  display: flex;
+padding-top: 45px;
+  
+ 
+}
+.mostratedusers{
+  /* display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  text-align: start; */
+  padding-left: 20px;
+}

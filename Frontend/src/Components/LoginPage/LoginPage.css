@@ -1,0 +1,24 @@
+.img-style {
+    border-radius: 1rem 0 0 1rem;
+}
+
+.signin-text {
+    letter-spacing: 1px;
+}
+
+.greet-hello {
+    color: rgba(180, 96, 206, 0.904);
+}
+
+.greet-wlcm {
+    color: tomato;
+}
+
+.brand-name {
+    color: #00478F;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.img-fluid {
+    height: 100%;
+}
