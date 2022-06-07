@@ -26,7 +26,7 @@ export const Otheruserprofile = () => {
           }
         })
         .then((res) => {
-          setData(res.data);
+          setData(res.data.posts);
         })
         .catch((err) => {
           console.log(err);
@@ -46,7 +46,7 @@ export const Otheruserprofile = () => {
 
           <div className="about-right">
             <span style={{fontWeight:"bold",fontSize:"40px"}}>{user.name}</span>
-            <h1>About Me</h1>
+            <h3>About Me</h3>
             <p>
               {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
               fugiat a dolorem at similique maxime dolorum dolore enim dicta
@@ -60,9 +60,7 @@ export const Otheruserprofile = () => {
                   <span className="address-logo">
                     <i className="fas fa-paper-plane"></i>
                   </span>
-                  <p>Address</p>
-                  <span className="saprater">:</span>
-                  <p>{user.city}, {user.state}, India</p>
+                  <p>Address<span className="saprater">:</span>{user.city}</p>
                 </li>
 
                 <li>

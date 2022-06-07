@@ -21,4 +21,4 @@ exports.uploads=(file,folder)=>{
     })
 }
 
-//module.exports = { cloudinary };
+// module.exports = { cloudinary };

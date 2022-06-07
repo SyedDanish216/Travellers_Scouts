@@ -1,4 +1,3 @@
-const { required } = require('joi');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -9,6 +8,7 @@ const DestinationSchema = new Schema({
         type: String,
         required: true
     },
+
     state:{
         type: String,
         required: true
@@ -19,35 +19,48 @@ const DestinationSchema = new Schema({
         required: true
     },
 
-
     description:{
      type:String,
      required:true
     },    
+
     userthumbnail:{
         type:String,
         required:true
     },
 
     images: [String],
-    // author: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User'
-    // },
+
     author:{
-        type:Object,
-        
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     username:{
         type:String,
         required:true
     },
-    reviewcount:{
-     type:Number,
-     default:0
+
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
     },
 
-    avgRating: Number
+    comments:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Review'
+    }],
+
+    avgRating: {
+        type: Number,
+        default: 0
+    }
 
 }, { timestamps: true })
 
