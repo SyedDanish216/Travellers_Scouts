@@ -2,6 +2,7 @@ import React from "react";
 import "./SearchCards.css";
 import { NavLink } from "react-router-dom";
 export const SearchCards = ({ data }) => {
+  
   return (
    
       <div className="outerbox1">

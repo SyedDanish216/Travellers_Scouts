@@ -69,109 +69,123 @@ router.get("/destination/getplaces", async (req, res) => {
 });
 
 router.get("/filterdata", async (req, res) => {
+  console.log(req.query);
   const placequery = req.query.place;
   const locationquery = req.query.location;
   const userquery = req.query.user;
   // console.log(placequery);
   // console.log(locationquery);
   // console.log(userquery);
-  let list = [];
+
   try {
-    //--------------------------------------------------------------//
-    if (placequery) {
-      if (locationquery && userquery) {
-        list = await Destination.aggregate([
-          { $sample: { size: 10 } },
-          {
-            $match: {
-              username: userquery,
-              city: locationquery,
-              title: placequery,
-            },
-          },
-        ]);
-      } else if (locationquery) {
-        list = await Destination.aggregate([
-          { $sample: { size: 10 } },
-          { $match: { city: locationquery, title: placequery } },
-        ]);
-      } else if (userquery) {
-        list = await Destination.aggregate([
-          { $sample: { size: 10 } },
-          { $match: { username: userquery, title: placequery } },
-        ]);
-      } else {
-        list = await User.aggregate([
-          { $sample: { size: 10 } },
-          { $match: { title: placequery } },
-        ]);
-      }
-    }
+    const post1 = await Destination.aggregate([
+      { $match: { username: userquery } },
+    ]);
+    const post2 = await Destination.aggregate([
+      { $match: { title: placequery } },
+    ]);
+    const post3 = await Destination.aggregate([
+      { $match: { city: locationquery } },
+    ]);
+    let combinedArray = [...post1, ...post2, ...post3];
+    res.status(200).json(combinedArray);
+    // let list = [];
+    // try {
+    //   //--------------------------------------------------------------//
+    //   if (placequery) {
+    //     if (locationquery && userquery) {
+    //       list = await Destination.aggregate([
+    //         { $sample: { size: 10 } },
+    //         {
+    //           $match: {
+    //             username: userquery,
+    //             city: locationquery,
+    //             title: placequery,
+    //           },
+    //         },
+    //       ]);
+    //     } else if (locationquery) {
+    //       list = await Destination.aggregate([
+    //         { $sample: { size: 10 } },
+    //         { $match: { city: locationquery, title: placequery } },
+    //       ]);
+    //     } else if (userquery) {
+    //       list = await Destination.aggregate([
+    //         { $sample: { size: 10 } },
+    //         { $match: { username: userquery, title: placequery } },
+    //       ]);
+    //     } else {
+    //       list = await User.aggregate([
+    //         { $sample: { size: 10 } },
+    //         { $match: { title: placequery } },
+    //       ]);
+    //     }
+    //   }
 
-    //------------------------------------------------//
-    else if (locationquery) {
-      if (placequery && userquery) {
-        list = await Destination.aggregate([
-          { $sample: { size: 10 } },
-          {
-            $match: {
-              username: userquery,
-              city: locationquery,
-              title: placequery,
-            },
-          },
-        ]);
-      } else if (placequery) {
-        list = await Destination.aggregate([
-          { $sample: { size: 10 } },
-          { $match: { city: locationquery, title: placequery } },
-        ]);
-      } else if (userquery) {
-        list = await Destination.aggregate([
-          { $sample: { size: 10 } },
-          { $match: { username: userquery, city: locationquery } },
-        ]);
-      } else {
-        list = await User.aggregate([
-          { $sample: { size: 10 } },
-          { $match: { city: locationquery } },
-        ]);
-      }
-    }
+    //   //------------------------------------------------//
+    //   else if (locationquery) {
+    //     if (placequery && userquery) {
+    //       list = await Destination.aggregate([
+    //         { $sample: { size: 10 } },
+    //         {
+    //           $match: {
+    //             username: userquery,
+    //             city: locationquery,
+    //             title: placequery,
+    //           },
+    //         },
+    //       ]);
+    //     } else if (placequery) {
+    //       list = await Destination.aggregate([
+    //         { $sample: { size: 10 } },
+    //         { $match: { city: locationquery, title: placequery } },
+    //       ]);
+    //     } else if (userquery) {
+    //       list = await Destination.aggregate([
+    //         { $sample: { size: 10 } },
+    //         { $match: { username: userquery, city: locationquery } },
+    //       ]);
+    //     } else {
+    //       list = await Destination.aggregate([
+    //         { $sample: { size: 10 } },
+    //         { $match: { city: locationquery } },
+    //       ]);
+    //     }
+    //   }
 
-    //------------------------------------------------//
-    else if (userquery) {
-      if (placequery && locationquery) {
-        list = await Destination.aggregate([
-          { $sample: { size: 10 } },
-          {
-            $match: {
-              username: userquery,
-              city: locationquery,
-              title: placequery,
-            },
-          },
-        ]);
-      } else if (placequery) {
-        list = await Destination.aggregate([
-          { $sample: { size: 10 } },
-          { $match: { username: userquery, title: placequery } },
-        ]);
-      } else if (locationquery) {
-        list = await Destination.aggregate([
-          { $sample: { size: 10 } },
-          { $match: { username: userquery, city: locationquery } },
-        ]);
-      } else {
-        list = await Destination.aggregate([
-          { $sample: { size: 10 } },
-          { $match: { username: userquery } },
-        ]);
-      }
-    } else {
-      list = await Destination.aggregate([{ $sample: { size: 10 } }]);
-    }
-    res.status(200).json(list);
+    //   //------------------------------------------------//
+    //   else if (userquery) {
+    //     if (placequery && locationquery) {
+    //       list = await Destination.aggregate([
+    //         { $sample: { size: 10 } },
+    //         {
+    //           $match: {
+    //             username: userquery,
+    //             city: locationquery,
+    //             title: placequery,
+    //           },
+    //         },
+    //       ]);
+    //     } else if (placequery) {
+    //       list = await Destination.aggregate([
+    //         { $sample: { size: 10 } },
+    //         { $match: { username: userquery, title: placequery } },
+    //       ]);
+    //     } else if (locationquery) {
+    //       list = await Destination.aggregate([
+    //         { $sample: { size: 10 } },
+    //         { $match: { username: userquery, city: locationquery } },
+    //       ]);
+    //     } else {
+    //       list = await Destination.aggregate([
+    //         { $sample: { size: 10 } },
+    //         { $match: { username: userquery } },
+    //       ]);
+    //     }
+    //   } else {
+    //     list = await Destination.aggregate([{ $sample: { size: 10 } }]);
+    //   }
+    // res.status(200).json(list);
   } catch (err) {
     res.status(500).json(err);
     console.log(err);
