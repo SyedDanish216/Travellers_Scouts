@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import classes from "./CreateExperience.module.css";
 import Card from "./Card/Card";
 import { Navbar } from "../LandingPage/Navbar/Navbar";
@@ -7,7 +7,8 @@ import { Footer } from "../LandingPage/Footer/Footer";
 import { AuthContext } from "../../authContext/AuthContext";
 import axios from "axios";
 import * as ReactBootStrap from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+
+
 const CreateExperience = () => {
   const history = useHistory();
   const [requiredfield, setRequiredfield] = useState(false);
@@ -53,6 +54,7 @@ const CreateExperience = () => {
     fd.append("author", user._id);
     fd.append("username", user.username);
     fd.append(`image`, photo);
+    fd.append("userid", user._id)
 
     for (let i = 0; i < files.length; i++) {
       fd.append(`image`, files[i]);
@@ -63,7 +65,7 @@ const CreateExperience = () => {
       setLoading(true);
       await axios
         .post("/dest/destination", fd)
-        .then((res) => {
+        .then((_res) => {
           setLoading(false);
           setTimeout(function(){
             alert("Post created successfull"); 

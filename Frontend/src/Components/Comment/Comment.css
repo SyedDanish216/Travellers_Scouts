@@ -1,0 +1,15 @@
+.comment-author {
+    font-family: Calibri;
+    color: coral;
+}
+
+.comment-body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+    color: black;
+}
+
+.comment-rating {
+    font-size: small;
+    font-weight: bold;
+}

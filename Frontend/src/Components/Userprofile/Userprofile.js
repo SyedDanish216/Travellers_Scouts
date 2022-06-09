@@ -14,8 +14,8 @@ export const Userprofile = () => {
       await axios
         .get(`/dest/destination/getposts${user._id ? "?id=" + user._id : ""}`)
         .then((res) => {
-          console.log(res.data);
-          setData(res.data);
+          console.log(res.data.posts);
+          setData(res.data.posts);
         })
         .catch((err) => {
           console.log(err);
