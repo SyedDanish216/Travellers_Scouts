@@ -54,7 +54,7 @@ const DestinationSchema = new Schema({
 
     comments:[{
         type: Schema.Types.ObjectId,
-        ref: 'Review'
+        ref: 'Comment'
     }],
 
     avgRating: {
