@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Slideitem.css";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-export const Slideitem = ({data}) => {
+
+export const Slideitem = ({ data }) => {
+  
+
   return (
     <div className="outerbox">
       <div>
-        <img
-          src={data.userthumbnail}
-          alt="..."
-        />
+        <img src={data.userthumbnail} alt="..." />
       </div>
       <div className="box">
         <div style={{ paddingLeft: "5px" }}>
@@ -27,10 +27,11 @@ export const Slideitem = ({data}) => {
         </div>
       </div>
       <div className="viewdetails">
-         <span><NavLink to="/SearchPlaces"
-          className="textnone">View Details<i className="fas fa-chevron-right"></i>
+        <span>
+          <NavLink to="/SearchPlaces" className="textnone">
+            View Details<i className="fas fa-chevron-right"></i>
           </NavLink>
-         </span>
+        </span>
       </div>
     </div>
   );

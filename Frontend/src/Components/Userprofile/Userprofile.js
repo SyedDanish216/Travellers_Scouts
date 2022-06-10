@@ -34,7 +34,9 @@ export const Userprofile = () => {
           </div>
 
           <div className="about-right">
-            <span style={{fontWeight:"bold",fontSize:"40px"}}>{user.username}</span>
+            <span style={{ fontWeight: "bold", fontSize: "40px" }}>
+              {user.username}
+            </span>
             <h1>About Me</h1>
             <p>
               {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
@@ -51,7 +53,9 @@ export const Userprofile = () => {
                   </span>
                   <p>Address</p>
                   <span className="saprater">:</span>
-                  <p>{user.city}, {user.state}, India</p>
+                  <p>
+                    {user.city}, {user.state}, India
+                  </p>
                 </li>
 
                 <li>
@@ -68,7 +72,9 @@ export const Userprofile = () => {
         </section>
         <div style={{ marginTop: "50px" }}>
           <div style={{ textAlign: "center" }}>
-            <span style={{ fontSize: "36px",fontWeight:"bold" }}>Experiences</span>
+            <span style={{ fontSize: "36px", fontWeight: "bold" }}>
+              Experiences
+            </span>
           </div>
           <div className="row mb-5" style={{ marginTop: "80px" }}>
             {data.map((elem, index) => {

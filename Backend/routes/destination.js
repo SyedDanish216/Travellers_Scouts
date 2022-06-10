@@ -6,6 +6,7 @@ const express = require("express");
 const fs = require("fs");
 const cloudinary = require("../cloudinary");
 const upload = require("../multer");
+const verify = require("../VerifyToken");
 
 //Create posts
 router.post("/destination", upload.array("image"), async (req, res) => {
@@ -50,7 +51,7 @@ router.post("/destination", upload.array("image"), async (req, res) => {
 });
 
 //get posts on user profile
-router.get("/destination/getposts", async (req, res) => {
+router.get("/destination/getposts",async (req, res) => {
   const id = req.query.id;
   const posts = await Destination.aggregate([{ $match: { author: id } }]);
   console.log(posts);

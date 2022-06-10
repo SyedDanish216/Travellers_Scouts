@@ -1,4 +1,4 @@
-import React, {useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
 import "./Review.css";
 import Card from "../CreateExperience/Card/Card";
@@ -6,18 +6,35 @@ import Rating from "./Ratings";
 import { Navbar } from "../LandingPage/Navbar/Navbar";
 import { Footer } from "../LandingPage/Footer/Footer";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const Review = () => {
-
-
-  const [data, setData] = useState(JSON.parse(localStorage.getItem("userexperience")));
-  useEffect(()=>{
-    const func=()=>{
+  const [weather, setWeather] = useState();
+  const [data, setData] = useState(
+    JSON.parse(localStorage.getItem("userexperience"))
+  );
+  useEffect(() => {
+    const func = () => {
       setData(JSON.parse(localStorage.getItem("userexperience")));
-    }
+    };
     func();
-},[data])
-  
+    const getWeather = async () => {
+      await axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${data.city}&appid=5ba4c372c82d4419fa0b363eb2fd0694`
+        )
+        .then((res) => {
+          console.log(res.data.main.temp);
+          setWeather(((res.data.main.temp - 32) * 5) / 9);
+          // setWeather(((res.data.main.temp - 32) * 5) / 9);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getWeather();
+  }, [data.city]);
+
   return (
     <>
       <Navbar />
@@ -34,9 +51,7 @@ const Review = () => {
                       letterSpacing: "1px",
                       wordSpacing: "5px",
                       color: "#00478f",
-                      
                     }}
-                    
                   >
                     {" "}
                     {/* Taj Mahal Experience */}
@@ -45,22 +60,19 @@ const Review = () => {
                 </div>
 
                 <div style={{ textAlign: "end" }}>
-                  <span style={{ fontSize: "18px" }} >
-                    author:
-                  </span>{" "}
+                  <span style={{ fontSize: "18px" }}>author:</span>{" "}
                   <span
                     style={{
                       fontSize: "20px",
                       fontStyle: "italic",
                       fontFamily: "cursive",
-
                     }}
                   >
                     {/* Cole{" "} */}
                     <NavLink
                       to={{ pathname: "/Userprofile", data: data.author }}
                       // target="_blank" rel="noopener noreferrer"
-                      style={{  textDecoration:"none",color:"gray"}}
+                      style={{ textDecoration: "none", color: "gray" }}
                       className="onhoveringusername"
                     >
                       {data.username}
@@ -91,15 +103,21 @@ const Review = () => {
                 display: "flex",
 
                 flexDirection: "column",
-                marginTop:"40px"
+                marginTop: "40px",
               }}
             >
-              <div>
-          <span style={{ fontSize:"30px",fontWeight:"500", fontFamily: "sans-serif",
-         }}>
-            Description
-          </span>
-        </div>
+              <div style={{ fontSize: "22px" }}>Temperature: {weather}°C</div>
+              <div style={{marginTop:"30px"}}>
+                <span
+                  style={{
+                    fontSize: "30px",
+                    fontWeight: "500",
+                    fontFamily: "sans-serif",
+                  }}
+                >
+                  Description
+                </span>
+              </div>
 
               <div className="mx-4 my-3">
                 <span style={{ fontSize: "19px" }}>
@@ -136,7 +154,7 @@ const Review = () => {
           </div>
         </Card>
         <div>
-          <div className="mb-5" style={{marginTop:"80px"}}>
+          <div className="mb-5" style={{ marginTop: "80px" }}>
             <Rating author={data.author} />
           </div>
         </div>

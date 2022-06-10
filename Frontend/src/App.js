@@ -7,7 +7,7 @@ import CreateExperience from "./Components/CreateExperience/CreateExperience";
 import { SearchPlaces } from "./Components/SeachPlaces/SearchPlaces";
 import { AboutUs } from "./Components/AboutUs/AboutUs";
 import Review from "./Components/UserPlaceReview/Review";
-import {Otheruserprofile} from "./Components/Otheruserprofile/Otheruserprofile"
+import { Otheruserprofile } from "./Components/Otheruserprofile/Otheruserprofile";
 import { Userprofile } from "./Components/Userprofile/Userprofile";
 
 const App = () => {

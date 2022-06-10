@@ -15,53 +15,70 @@ export const SearchPlaces = () => {
   const [placedata, setplaceData] = useState([]);
   const [postdata, setPostData] = useState([]);
   useEffect(() => {
-    const getPlaces = async () => {
-      await axios
-        .get("/dest/filterdata/", {
-          params: {
-            location: locationInput,
-            place: placeInput,
-            user: userInput,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          setplaceData(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getPlaces();
+    // const getPlaces = async () => {
+    //   await axios
+    //     .get("/dest/filterdata/", {
+    //       params: {
+    //         location: locationInput,
+    //         place: placeInput,
+    //         user: userInput,
+    //       },
+    //     })
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       setplaceData(res.data);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // };
+    // getPlaces();
     const getData = async () => {
       await axios
         .get("/dest/destination/getplaces")
         .then((res) => {
           setPostData(res.data);
+          setplaceData(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
     };
     getData();
-  }, [locationInput,placeInput,userInput]);
+  }, []);
 
   const PostData = async (e) => {
     const getPlaces = async () => {
       await axios
-        .get(
-          `/dest/filterdata${
-            locationInput ? "?location=" + locationInput : ""
-          }${placeInput ? "&place=" + placeInput : ""}${
-            userInput ? "&user=" + userInput : ""
-          }`
-        )
-        .then((res) => {
-          setplaceData(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      .get("/dest/filterdata/", {
+        params: {
+          location: locationInput,
+          place: placeInput,
+          user: userInput,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setplaceData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      
+      // await axios
+      //   .get(
+      //     `/dest/filterdata${
+      //       locationInput ? "?location=" + locationInput : ""
+      //     }${placeInput ? "&place=" + placeInput : ""}${
+      //       userInput ? "&user=" + userInput : ""
+      //     }`
+      //   )
+      //   .then((res) => {
+      //     setplaceData(res.data);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
     };
     getPlaces();
   };

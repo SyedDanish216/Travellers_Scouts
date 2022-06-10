@@ -12,7 +12,7 @@ import { Footer } from "../LandingPage/Footer/Footer";
 
 export const LoginPage = () => {
   const history = useHistory();
-  const { user } = useContext(AuthContext);
+   const { user } = useContext(AuthContext);
   const [isuser,setIsuser]=useState(true);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export const LoginPage = () => {
   };
   return (
     <>
-      <Navbar />
+      <Navbar home="login"/>
 
       <div style={{ marginTop: "120px", marginBottom: "140px" }}>
         <Card>

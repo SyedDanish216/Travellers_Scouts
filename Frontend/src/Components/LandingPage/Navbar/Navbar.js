@@ -13,11 +13,12 @@ export const Navbar = ({ home }) => {
   };
 
   const { user } = useContext(AuthContext);
+  const user1 = JSON.parse(localStorage.getItem("user"));
   const { dispatch } = useContext(AuthContext);
 
   return (
     <div className="head">
-      {home && (
+      {home === "home" && (
         <div className="tansparentshading">
           <p>TRAVELLER'S SCOUT</p>
           <span>A globetrotter's guide,</span>
@@ -28,7 +29,7 @@ export const Navbar = ({ home }) => {
       <div>
         <nav
           className={
-            home
+            home === "home"
               ? isScrolled
                 ? "scrolled navbar navbar-expand-lg navbar-light"
                 : "navbar navbar-expand-lg navbar-light"
@@ -52,7 +53,7 @@ export const Navbar = ({ home }) => {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
-              {user ? (
+              {user || user1 ? (
                 <li className="nav-item dropdown">
                   <NavLink className="nav-link" to="/Userprofile">
                     Your Profile
@@ -65,15 +66,14 @@ export const Navbar = ({ home }) => {
                   </NavLink>
                 </li>
               )}
-              {user && (
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/">
-                    Home
-                  </NavLink>
-                </li>
-              )}
 
-              {user && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/">
+                  Home
+                </NavLink>
+              </li>
+
+              {(user || user1) && (
                 <li className="nav-item dropdown">
                   <NavLink
                     className="nav-link dropdown-toggle"
@@ -102,11 +102,11 @@ export const Navbar = ({ home }) => {
               )}
 
               <li className="nav-item">
-                <NavLink className="nav-link" to="/AboutUs" role="button">
+                <NavLink to="/AboutUs" role="button" className="nav-link">
                   About Us
                 </NavLink>
               </li>
-              {user && (
+              {(user || user1) && (
                 <li className="nav-item dropdown">
                   <NavLink
                     className="nav-link"
@@ -121,7 +121,7 @@ export const Navbar = ({ home }) => {
           </div>
         </nav>
       </div>
-      {home && (
+      {home === "home" && (
         <div className="cara">
           <div
             id="carouselExampleControls"

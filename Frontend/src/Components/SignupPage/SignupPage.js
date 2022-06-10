@@ -104,9 +104,18 @@ export const SignupPage = () => {
       await axios
         .post("/auth/register", fd)
         .then((res) => {
-          console.log(res);
-          setLoading(false);
-          history.push("/LogIn");
+          if(res.status===400)
+          {
+            console.log(res);
+            setLoading(false);
+            alert("email already exist");
+          }
+          else
+          {
+         
+            history.push("/LogIn");
+          }
+      
         })
         .catch((err) => {
           console.log(err);
@@ -125,8 +134,7 @@ export const SignupPage = () => {
           alignItems: "center",
           display: "flex",
         }}
-      >
-      </div>
+      ></div>
       <div style={{ marginTop: "50px" }}>
         <Card>
           <div className="row g-0">

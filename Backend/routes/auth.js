@@ -5,11 +5,13 @@ const express = require("express");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const upload = require("../multer");
+const { json } = require("express");
 
 //Register
 router.post("/register", upload.single("photo"), async (req, res) => {
   const photo = req.file ? req.file.path : null;
   const result = await cloudinary.uploads(photo, "Images");
+
   const newUser = new User({
     username: req.body.username,
     name: req.body.name,
@@ -24,6 +26,13 @@ router.post("/register", upload.single("photo"), async (req, res) => {
     ).toString(),
   });
   try {
+    const em = await User.findOne({ email: req.body.email });
+
+    if (em) {
+      res.status(400);
+      throw new Error("User already exists");
+    }
+
     const user = await newUser.save();
     res.status(201).json(user);
   } catch (err) {

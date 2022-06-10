@@ -8,7 +8,7 @@ export const AboutUs = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar home="aboutus" />
 
       <div
         style={{

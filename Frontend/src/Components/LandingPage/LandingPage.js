@@ -8,13 +8,13 @@ import { useHistory } from "react-router-dom";
 export const LandingPage = () => {
   const history = useHistory();
   const { user } = useContext(AuthContext);
-  useEffect(() => {
-    if (!user) {
-      history.push("/Login");
-      console.log(user);
-    }
+  // useEffect(() => {
+  //   if (!user) {
+  //     history.push("/Login");
+  //     console.log(user);
+  //   }
  
-  }, [user,history]);
+  // }, [user,history]);
   return (
     <>
       <Navbar home="home" />
