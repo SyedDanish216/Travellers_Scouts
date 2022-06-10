@@ -7,17 +7,36 @@ import { Footer } from "../LandingPage/Footer/Footer";
 import { NavLink } from "react-router-dom";
 import Map from "../Map/Map";
 import Ratings from "./Ratings";
+import axios from "axios";
+import Comment from "../Comment/Comment";
 
 const Review = () => {
 
 
   const [data, setData] = useState(JSON.parse(localStorage.getItem("userexperience")));
+  const [comments, setComments] = useState([])
   useEffect(()=>{
     const func=()=>{
       setData(JSON.parse(localStorage.getItem("userexperience")));
     }
     func();
 },[data])
+
+  useEffect(()=>{
+    const func = ()=>{
+      let dest_id = data._id
+      axios.post("http://localhost:8000/api/dest/destination/getcomments", {
+        dest_id : dest_id
+      })
+      .then((res)=>{
+        // console.log(res.data)
+        setComments(res.data.comments)
+      }).catch((err)=>{
+        console.log("Error retrieving comments", err)
+      }) 
+    }
+    func();
+  }, [comments])
   
   return (
     <>
@@ -42,7 +61,7 @@ const Review = () => {
                   >
                     {" "}
                     {/* Taj Mahal Experience */}
-                    {data.title}
+                    {data.title} <span style={{fontSize: "20px"}}>&nbsp; Avg Rating: {data.avgRating}</span>
                   </span>
                 </div>
 
@@ -112,15 +131,35 @@ const Review = () => {
           </div>
         </Card>
         {/* Add All the comments here */}
-        <div>
+        <Card>
+          <h4 style={{
+            color: "orange", 
+            marginLeft: "100px", 
+            marginBottom: "0px", 
+            marginTop:"30px", 
+            fontStyle:"Bold"}
+            }>Comments</h4>
+          
           {
-            data.comments.map((comment)=>
-              // <div>{comment.rating}&nbsp; &nbsp;{comment.comment}</div>
-              <div>{comment}</div>
-
-            )
+            comments.length>0 && <div>
+              { 
+                comments.map((comment)=>
+                  // <div>{comment.rating}&nbsp; &nbsp;{comment.comment}</div>
+                  // <div>{comment}</div>
+                  <Comment comment={comment}></Comment>
+                )
+              }
+            </div>
           }
-        </div>
+          {comments.length===0 && <div style={{
+              color: "blue", 
+              marginLeft: "100px", 
+              marginBottom: "0px", 
+              marginTop:"30px", 
+              fontStyle:"Bold"}}
+          >be the first one to comment</div>
+          }
+        </Card>
         <div>
           <div className="mb-5" style={{marginTop:"80px"}}>
             <Ratings dest_id = {data._id} author = {data.author} />

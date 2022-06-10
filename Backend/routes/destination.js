@@ -82,6 +82,19 @@ router.get("/destination/getposts", async (req, res) => {
   res.status(200).json({posts: posts});
 });
 
+router.post("/destination/getcomments", async(req, res)=>{
+  // console.log(req.body)
+  const destination = await Destination.findById(req.body.dest_id).populate({
+      path: 'comments',
+      populate: {
+        path: 'author'
+      }
+  });
+  // console.log(destination)
+  const comments = destination.comments;
+  res.status(200).json({comments: comments})
+})
+
 //getting places data
 router.get("/destination/getplaces", async (req, res) => {
   try {

@@ -1,11 +1,16 @@
-.reviewHeading{
+.reviewHeading {
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
-
     position: relative;
 }
-.onhoveringusername:hover{
+
+.onhoveringusername:hover {
     color: black !important;
+}
+
+.comment-heading {
+    font-weight: 700;
+    margin: 20px;
 }
